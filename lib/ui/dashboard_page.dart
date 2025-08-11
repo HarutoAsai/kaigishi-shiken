@@ -17,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
     // ★ Scaffold で包む（AppBarは確認用）
     return Scaffold(
-      appBar: AppBar(title: const Text('HOME v3 確認用')),
+      appBar: AppBar(title: const Text('HOME v3 確認用🚀 build-check-01')),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (_, c) {
@@ -29,7 +29,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 // ペンギン先生を追加
 Center(
   child: Image.asset(
-    'assets/images/mascot.png',
+    'assets/images/mascot_v2.png',
     width: 180,
     height: 180,
     errorBuilder: (_, __, ___) => const Text('🐧が見つからない…'),
