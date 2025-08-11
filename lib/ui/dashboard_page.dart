@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -16,94 +17,235 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    const gradient = LinearGradient(
+      colors: [Color(0xFFEBF3FF), Color(0xFFF8FBFF)],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+
     return Scaffold(
       appBar: AppBar(title: const Text('HOME v3 確認用🚀 build-check-01')),
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (_, c) {
-            final isWide = c.maxWidth >= 900;
+      body: Stack(
+        children: [
+          // 背景
+          Container(decoration: const BoxDecoration(gradient: gradient)),
+          Positioned(top: -80, left: -40, child: _blurCircle(220, const Color(0xFFB3E5FC))),
+          Positioned(bottom: -60, right: -30, child: _blurCircle(260, const Color(0xFFC5CAE9))),
 
-            final body = Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // ペンギン先生を追加
+          // 本文
+          SafeArea(
+            child: LayoutBuilder(
+              builder: (_, c) {
+                final isWide = c.maxWidth >= 900;
 
-Center(
-  child: kIsWeb
-      // ← Webだけは本番の絶対URLから読む（確実に表示）
-      ? Image.network(
-          'https://harutoasai.github.io/kaigishi-shiken/assets/assets/images/mascot_v2.png',
-          width: 180,
-          height: 180,
-          errorBuilder: (_, __, ___) => const Text('🐧(web) 読み込み失敗'),
-        )
-      : Image.asset(
-          'assets/images/mascot_v2.png',
-          width: 180,
-          height: 180,
-          errorBuilder: (_, __, ___) => const Text('🐧(asset) 見つからない'),
+final header = _GlassCard(
+  child: LayoutBuilder(
+    builder: (context, box) {
+      final isNarrow = box.maxWidth < 720; // 狭いときは縦並び
+
+      final bubble = Flexible(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 520), // 取りすぎ防止
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.92),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: Colors.black.withOpacity(0.05)),
+            ),
+            child: Text(
+              '今日の目標、いっしょにがんばろう！',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF0F1A2A),
+              ),
+              // ← 省略しない＆必要なら改行OK
+              softWrap: true,
+              maxLines: 3,
+              overflow: TextOverflow.visible,
+            ),
+          ),
         ),
-),
-const SizedBox(height: 12),
+      );
 
+      final left = Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const _MascotImage(size: 128),
+          const SizedBox(width: 12),
+          bubble,
+        ],
+      );
 
-                _TodayCard(
-                  done: todayDone,
-                  goal: todayGoal,
-                  onStart: () {
-                    // クイズへ遷移
-                    Navigator.of(context).pushNamed('/quiz');
-                  },
-                ),
+      final cta = FilledButton.icon(
+        onPressed: () => Navigator.of(context).pushNamed('/quiz'),
+        icon: const Icon(Icons.play_arrow),
+        label: const Text('クイックスタート'),
+      );
+
+      // 狭い時は縦、広い時は横で両端寄せ
+      return isNarrow
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                left,
                 const SizedBox(height: 12),
-                _MiniTrendCard(values: recentAccuracies),
-                const SizedBox(height: 12),
-                Text('クイックスタート', style: theme.textTheme.titleMedium),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    _TopicChip(label: '航海', onTap: () => Navigator.of(context).pushNamed('/quiz')),
-                    _TopicChip(label: '機関', onTap: () => Navigator.of(context).pushNamed('/quiz')),
-                    _TopicChip(label: '法規', onTap: () => Navigator.of(context).pushNamed('/quiz')),
-                  ],
-                ),
+                Align(alignment: Alignment.centerRight, child: cta),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.space-between,
+              children: [
+                Expanded(child: left), // 左側に十分な幅を確保
+                const SizedBox(width: 12),
+                cta,
               ],
             );
+    },
+  ),
+);
 
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 900),
-                  child: isWide
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(child: body),
-                            const SizedBox(width: 16),
-                            const Expanded(
-                              child: _TipsCard(
-                                lines: [
-                                  'ポイント：短時間でも毎日触る',
-                                  '間違えた問題を翌日に復習',
-                                  '模擬試験は週1回で良い',
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
-                      : body,
-                ),
-              ),
-            );
-          },
+                      const SizedBox(width: 12),
+                      FilledButton.icon(
+                        onPressed: () => Navigator.of(context).pushNamed('/quiz'),
+                        icon: const Icon(Icons.play_arrow),
+                        label: const Text('クイックスタート'),
+                      ),
+                    ],
+                  ),
+                );
+
+                final body = Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    header,
+                    const SizedBox(height: 12),
+                    _TodayCard(
+                      done: todayDone,
+                      goal: todayGoal,
+                      onStart: () => Navigator.of(context).pushNamed('/quiz'),
+                    ),
+                    const SizedBox(height: 12),
+                    _MiniTrendCard(values: recentAccuracies),
+                    const SizedBox(height: 12),
+                    Text('クイックスタート', style: theme.textTheme.titleMedium),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        _TopicChip(label: '航海', onTap: () => Navigator.of(context).pushNamed('/quiz')),
+                        _TopicChip(label: '機関', onTap: () => Navigator.of(context).pushNamed('/quiz')),
+                        _TopicChip(label: '法規', onTap: () => Navigator.of(context).pushNamed('/quiz')),
+                      ],
+                    ),
+                  ],
+                );
+
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 960),
+                      child: isWide
+                          ? Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(child: body),
+                                const SizedBox(width: 16),
+                                const Expanded(
+                                  child: _TipsCard(
+                                    lines: [
+                                      'ポイント：短時間でも毎日触る',
+                                      '間違えた問題を翌日に復習',
+                                      '模擬試験は週1回で良い',
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : body,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget _blurCircle(double size, Color color) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(size),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
+        child: Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(shape: BoxShape.circle, color: color.withOpacity(0.25)),
         ),
       ),
     );
   }
 }
+
+/// ガラス風カード
+class _GlassCard extends StatelessWidget {
+  const _GlassCard({required this.child, this.padding = const EdgeInsets.all(16)});
+  final Widget child;
+  final EdgeInsetsGeometry padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+        child: Container(
+          padding: padding,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white.withOpacity(0.10),
+            border: Border.all(color: Colors.white.withOpacity(0.25)),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 24,
+                spreadRadius: -4,
+                offset: const Offset(0, 10),
+                color: Colors.black.withOpacity(0.2),
+              ),
+            ],
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+/// マスコット画像（Web/ローカル両対応）
+class _MascotImage extends StatelessWidget {
+  const _MascotImage({this.size = 140});
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    const assetPath = 'assets/images/mascot_v2.png';
+    const webUrl =
+        'https://harutoasai.github.io/kaigishi-shiken/assets/assets/images/mascot_v2.png';
+    return kIsWeb
+        ? Image.network(webUrl, width: size, height: size, errorBuilder: (_, __, ___) {
+            return const Text('🐧(web) 読み込み失敗');
+          })
+        : Image.asset(assetPath, width: size, height: size, errorBuilder: (_, __, ___) {
+            return const Text('🐧(asset) 見つからない');
+          });
+  }
+}
+
+/* ===================== ここから下は既存カード群（そのまま） ===================== */
 
 class _TodayCard extends StatelessWidget {
   const _TodayCard({required this.done, required this.goal, required this.onStart});
