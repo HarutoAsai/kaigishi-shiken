@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -15,7 +16,6 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // ★ Scaffold で包む（AppBarは確認用）
     return Scaffold(
       appBar: AppBar(title: const Text('HOME v3 確認用🚀 build-check-01')),
       body: SafeArea(
@@ -27,15 +27,25 @@ class _DashboardPageState extends State<DashboardPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // ペンギン先生を追加
+
 Center(
-  child: Image.asset(
-    'assets/images/mascot_v2.png',
-    width: 180,
-    height: 180,
-    errorBuilder: (_, __, ___) => const Text('🐧が見つからない…'),
-  ),
+  child: kIsWeb
+      // ← Webだけは本番の絶対URLから読む（確実に表示）
+      ? Image.network(
+          'https://harutoasai.github.io/kaigishi-shiken/assets/assets/images/mascot_v2.png',
+          width: 180,
+          height: 180,
+          errorBuilder: (_, __, ___) => const Text('🐧(web) 読み込み失敗'),
+        )
+      : Image.asset(
+          'assets/images/mascot_v2.png',
+          width: 180,
+          height: 180,
+          errorBuilder: (_, __, ___) => const Text('🐧(asset) 見つからない'),
+        ),
 ),
 const SizedBox(height: 12),
+
 
                 _TodayCard(
                   done: todayDone,
