@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "eng-001",
+      "category": "英語",
+      "topic": "頻出単語",
+      "difficulty": 1,
+      "question": "engineの意味として最も適切なのはどれ？",
+      "choices": ["機関", "運用", "構造", "気象"],
+      "answer_index": 0,
+      "explanation": "engineは機関（機械の駆動部）を指す。文脈によりエンジン/機関。"
+    },
+    {
+      "id": "calc-001",
+      "category": "計算",
+      "topic": "比重",
+      "difficulty": 2,
+      "question": "海水(比重1.025) 500L の質量(kg)は？",
+      "choices": ["512.5", "500", "487.5", "525"],
+      "answer_index": 0,
+      "explanation": "概算で1L≈1kgとして 500×1.025=512.5kg。"
+    },
+    {
+      "id": "law-001",
+      "category": "法規",
+      "topic": "航行灯",
+      "difficulty": 2,
+      "question": "右舷灯の色は？",
+      "choices": ["緑", "赤", "白", "黄"],
+      "answer_index": 0,
+      "explanation": "右舷=緑、左舷=赤（一般常識）。"
+    },
+    {
+      "id": "mech-001",
+      "category": "機関",
+      "topic": "ディーゼル基礎",
+      "difficulty": 1,
+      "question": "四行程ディーゼル機関の行程順として正しいのは？",
+      "choices": ["吸気→圧縮→燃焼（膨張）→排気", "圧縮→吸気→排気→燃焼", "吸気→燃焼→圧縮→排気", "燃焼→吸気→排気→圧縮"],
+      "answer_index": 0,
+      "explanation": "四行程は吸気→圧縮→燃焼（膨張）→排気。"
+    },
+    {
+      "id": "ops-001",
+      "category": "運用",
+      "topic": "見張り",
+      "difficulty": 1,
+      "question": "衝突予防の観点で航行中に常時必要な義務はどれ？",
+      "choices": ["適切な見張り", "常時汽笛を吹鳴", "常時右転", "常時投錨"],
+      "answer_index": 0,
+      "explanation": "常時、視覚・聴覚・適切な利用可能な手段による見張りが基本。"
+    },
+    {
+      "id": "struct-001",
+      "category": "構造",
+      "topic": "水密隔壁",
+      "difficulty": 2,
+      "question": "船内の水密隔壁の主目的として最も適切なのは？",
+      "choices": ["浸水の拡大防止", "推進効率の向上", "居住性向上", "空調効率の改善"],
+      "answer_index": 0,
+      "explanation": "区画化して浸水を局限し、復原性と安全性を確保する。"
+    },
+    {
+      "id": "elec-001",
+      "category": "電気",
+      "topic": "直列回路",
+      "difficulty": 1,
+      "question": "純抵抗の直列回路における各素子の電流は？",
+      "choices": ["すべて同じ", "分圧比で異なる", "抵抗が小さいほど大きい", "位相で決まる"],
+      "answer_index": 0,
+      "explanation": "直列は回路電流が1本なので各素子の電流は同一。"
+    },
+    {
+      "id": "met-001",
+      "category": "気象",
+      "topic": "視程",
+      "difficulty": 1,
+      "question": "一般に霧（fog）の定義として用いられる水平視程は？",
+      "choices": ["1km未満", "3km未満", "5km未満", "500m未満"],
+      "answer_index": 0,
+      "explanation": "多くの運用上の定義で視程1km未満を霧とする（mistは1～10km程度）。"
+    },
+    {
+      "id": "mech-002",
+      "category": "機関",
+      "topic": "冷却",
+      "difficulty": 1,
+      "question": "機関の冷却水の主な役割はどれ？",
+      "choices": ["温度管理", "潤滑", "燃料供給", "点火"],
+      "answer_index": 0,
+      "explanation": "燃焼・摩擦で上昇する部品温度を管理して性能と耐久性を維持。"
+    },
+    {
+      "id": "calc-002",
+      "category": "計算",
+      "topic": "速度と距離",
+      "difficulty": 1,
+      "question": "船速10knで2時間航走したときの距離（海里）は？",
+      "choices": ["18", "20", "22", "10"],
+      "answer_index": 1,
+      "explanation": "距離＝速度×時間＝10×2＝20海里。"
+    }
+  ]
+}
