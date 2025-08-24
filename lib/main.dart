@@ -7,8 +7,6 @@ import 'ui/dashboard_page.dart';
 
 void main() => runApp(const SeaQuizApp());
 
-class SeaQuizApp extends StatelessWidget {
-  const SeaQuizApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
