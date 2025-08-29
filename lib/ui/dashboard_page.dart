@@ -21,7 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(title: const Text('海技士 学習ダッシュボード')),
       body: Stack(
         children: [
-          // 背景：タッチ無視（スクロール奪わない）
+          // 背景はタッチ無効（スクロールを奪わない）
           IgnorePointer(
             ignoring: true,
             child: Stack(
@@ -33,11 +33,11 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ),
 
-          // 前面
+          // 前面：ここだけがタッチ/スクロールを受ける
           SafeArea(
             child: LayoutBuilder(
               builder: (_, c) {
-                final isNarrow = c.maxWidth < 680; // ← ここでスマホ判定
+                final isNarrow = c.maxWidth < 680;
 
                 final heroText = Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,38 +46,39 @@ class _DashboardPageState extends State<DashboardPage> {
                     const SizedBox(height: 8),
                     const Text('級を選んで → トピックを選んで → クイズ開始！'),
                     const SizedBox(height: 12),
-                    isNarrow
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              FilledButton.icon(
-                                onPressed: () => Navigator.pushNamed(context, '/setup'),
-                                icon: const Icon(Icons.play_arrow),
-                                label: const Text('級から選んで始める'),
-                              ),
-                              const SizedBox(height: 8),
-                              OutlinedButton.icon(
-                                onPressed: () => Navigator.pushNamed(context, '/quiz'),
-                                icon: const Icon(Icons.bolt),
-                                label: const Text('すぐにクイズ（デモ）'),
-                              ),
-                            ],
-                          )
-                        : Wrap(
-                            spacing: 8,
-                            children: [
-                              FilledButton.icon(
-                                onPressed: () => Navigator.pushNamed(context, '/setup'),
-                                icon: const Icon(Icons.play_arrow),
-                                label: const Text('級から選んで始める'),
-                              ),
-                              OutlinedButton.icon(
-                                onPressed: () => Navigator.pushNamed(context, '/quiz'),
-                                icon: const Icon(Icons.bolt),
-                                label: const Text('すぐにクイズ（デモ）'),
-                              ),
-                            ],
+                    if (isNarrow)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          FilledButton.icon(
+                            onPressed: () => Navigator.pushNamed(context, '/setup'),
+                            icon: const Icon(Icons.play_arrow),
+                            label: const Text('級から選んで始める'),
                           ),
+                          const SizedBox(height: 8),
+                          OutlinedButton.icon(
+                            onPressed: () => Navigator.pushNamed(context, '/quiz'),
+                            icon: const Icon(Icons.bolt),
+                            label: const Text('すぐにクイズ（デモ）'),
+                          ),
+                        ],
+                      )
+                    else
+                      Wrap(
+                        spacing: 8,
+                        children: [
+                          FilledButton.icon(
+                            onPressed: () => Navigator.pushNamed(context, '/setup'),
+                            icon: const Icon(Icons.play_arrow),
+                            label: const Text('級から選んで始める'),
+                          ),
+                          OutlinedButton.icon(
+                            onPressed: () => Navigator.pushNamed(context, '/quiz'),
+                            icon: const Icon(Icons.bolt),
+                            label: const Text('すぐにクイズ（デモ）'),
+                          ),
+                        ],
+                      ),
                   ],
                 );
 
@@ -175,7 +176,7 @@ class _Mascot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1) アセット → 2) Web → 3) アイコン の順にフォールバック
+    // 1) アセット → 2) Web → 3) アイコンの順にフォールバック
     return Image.asset(
       'assets/images/mascot_v2.png',
       fit: BoxFit.contain,

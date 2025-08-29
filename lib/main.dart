@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'ui/dashboard_page.dart';
+import 'ui/grade_topic_setup_page.dart';
+import 'ui/quiz_page.dart';
 
 void main() => runApp(const SeaQuizApp());
 
@@ -22,7 +24,7 @@ class SeaQuizApp extends StatelessWidget {
       theme: base.copyWith(
         textTheme: GoogleFonts.notoSansJpTextTheme(base.textTheme),
       ),
-      // スクロール最適化（スマホOK）
+      // ← スクロールを全入力デバイスで許可（スマホOK）
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {
           PointerDeviceKind.touch,
@@ -32,6 +34,10 @@ class SeaQuizApp extends StatelessWidget {
         },
       ),
       home: const DashboardPage(),
+      routes: {
+        '/setup': (_) => const GradeTopicSetupPage(),
+        '/quiz' : (_) => const QuizPage(),
+      },
     );
   }
 }
