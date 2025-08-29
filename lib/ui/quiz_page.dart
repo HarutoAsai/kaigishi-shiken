@@ -37,24 +37,21 @@ class _QuizPageState extends State<QuizPage> {
 
     _prefs = await SharedPreferences.getInstance();
 
-    // load questions
     final raw = await rootBundle.loadString('assets/questions.json');
     final List list = jsonDecode(raw) as List;
     final all = list.map((e) => _Q.fromMap(e as Map<String, dynamic>)).toList();
 
-    // filter
     Iterable<_Q> filtered = all;
     if (chosenGrade != null) filtered = filtered.where((q) => q.grade == chosenGrade);
     if (chosenTopic != null && chosenTopic!.isNotEmpty) filtered = filtered.where((q) => q.topic == chosenTopic);
 
-    // shuffle
     final rng = Random();
     _qs = filtered.toList()..shuffle(rng);
     if (_qs.isEmpty) {
       _qs = (all..shuffle(rng)).take(10).toList();
     }
 
-    // load stats
+    // load per-question stats
     for (final q in _qs) {
       final a = _prefs.getInt('stats:${q.id}:attempts') ?? 0;
       final c = _prefs.getInt('stats:${q.id}:correct') ?? 0;
@@ -135,7 +132,8 @@ class _QuizPageState extends State<QuizPage> {
           children: [
             LinearProgressIndicator(value: progress, minHeight: 6),
             const SizedBox(height: 12),
-            // 質問カード
+
+            // 質問カード（上は固定）
             Card(
               elevation: 1,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -144,30 +142,30 @@ class _QuizPageState extends State<QuizPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.help_outline, size: 24),
-                        const SizedBox(width: 12),
-                        Expanded(child: Text(q.question, style: Theme.of(context).textTheme.titleMedium)),
-                      ],
-                    ),
+                    Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      const Icon(Icons.help_outline, size: 24),
+                      const SizedBox(width: 12),
+                      Expanded(child: Text(q.question, style: Theme.of(context).textTheme.titleMedium)),
+                    ]),
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        if (rate != null)
-                          Chip(
-                            avatar: const Icon(Icons.insights, size: 18),
-                            label: Text('この問題の正答率 ${ (rate * 100).toStringAsFixed(0) }%'),
+                        Chip(
+                          avatar: const Icon(Icons.insights, size: 18),
+                          label: Text(
+                            rate == null ? 'この問題の正答率 ー %（初回）' : 'この問題の正答率 ${ (rate * 100).toStringAsFixed(0) }%',
                           ),
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
+
             const SizedBox(height: 12),
-            // 選択肢（ListViewで縦スクロールOK）
+
+            // 選択肢（ここが縦スクロール領域）
             Expanded(
               child: ListView.separated(
                 itemCount: q.options.length,
@@ -219,6 +217,7 @@ class _QuizPageState extends State<QuizPage> {
                 },
               ),
             ),
+
             if (_answered && q.explanation != null) ...[
               const SizedBox(height: 8),
               Card(
@@ -238,6 +237,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
             ],
             const SizedBox(height: 10),
+
             Row(
               children: [
                 Text('スコア: $_score / $total'),
@@ -278,6 +278,7 @@ class _Q {
   factory _Q.fromMap(Map<String, dynamic> m) {
     final options = (m['options'] as List).cast<String>().toList();
     final correct = m['answer'] as int;
+    // シャッフルして正解位置を再計算
     final idx = List<int>.generate(options.length, (i) => i)..shuffle();
     final shuffled = [for (final i in idx) options[i]];
     final newAnswer = idx.indexOf(correct);

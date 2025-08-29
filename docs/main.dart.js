@@ -68617,9 +68617,7 @@ l=t.E
 s=A.ae_(A.c([new A.co(B.kt,A.ahK(B.Br,A.eC(""+(h.f+1)+"/"+m,g)),g)],l),!0,s)
 k=A.nO(16)
 j=A.iP(A.c([B.Bq,B.vT,A.tA(A.eC(q.d,A.V(a).ok.w),1)],l),B.aC,B.ak)
-i=A.c([],l)
-if(n!=null)i.push(A.ahK(B.Bp,A.eC("\u3053\u306e\u554f\u984c\u306e\u6b63\u7b54\u7387 "+B.c.U(n*100,0)+"%",g)))
-r=A.c([new A.ur(6,(r+1)/p,g,g,g,g,g,g),B.f5,A.ahI(new A.co(B.cn,A.ln(A.c([j,B.c6,A.iP(i,B.aD,B.ak)],l),B.aC,B.aq,B.ak),g),g,1,new A.ca(k,B.q)),B.f5,A.tA(A.asG(new A.a9K(h,q),q.e.length,new A.a9L()),1)],l)
+r=A.c([new A.ur(6,(r+1)/p,g,g,g,g,g,g),B.f5,A.ahI(new A.co(B.cn,A.ln(A.c([j,B.c6,A.iP(A.c([A.ahK(B.Bp,A.eC(n==null?"\u3053\u306e\u554f\u984c\u306e\u6b63\u7b54\u7387 \u30fc %\uff08\u521d\u56de\uff09":"\u3053\u306e\u554f\u984c\u306e\u6b63\u7b54\u7387 "+B.c.U(n*100,0)+"%",g))],l),B.aD,B.ak)],l),B.aC,B.aq,B.ak),g),g,1,new A.ca(k,B.q)),B.f5,A.tA(A.asG(new A.a9K(h,q),q.e.length,new A.a9L()),1)],l)
 if(h.x&&q.r!=null){k=A.am(15,B.cr.u()>>>16&255,B.cr.u()>>>8&255,B.cr.u()&255)
 j=A.nO(14)
 i=q.r
