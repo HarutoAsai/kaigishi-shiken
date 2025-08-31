@@ -11,15 +11,30 @@ class TopicScoreLabel extends StatelessWidget {
     return FutureBuilder<dynamic>(
       future: TopicStatsService().get(topicId),
       builder: (context, snap) {
-        if (!snap.hasData) return const SizedBox.shrink();
-        final s = snap.data;
-        final attempted = (s?.attempted ?? 0) as int;
-        final correct   = (s?.correct ?? 0) as int;
-        final text = attempted == 0 ? '未挑戦' : '$attempted問中 $correct問 正解';
-        return Text(
-          text,
-          style: style ?? Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
-        );
+        if (snap.connectionState != ConnectionState.done) {
+          return const SizedBox.shrink();
+        }
+        try {
+          final data = snap.data;
+          int attempted = 0;
+          int correct = 0;
+
+          if (data is Map) {
+            final a = data['attempted'];
+            final c = data['correct'];
+            if (a is num) attempted = a.toInt();
+            if (c is num) correct = c.toInt();
+          }
+
+          final text = attempted == 0 ? '未挑戦' : '$attempted問中 $correct問 正解';
+          return Text(
+            text,
+            style: style ?? Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+          );
+        } catch (_) {
+          // 何かあっても落とさない
+          return const SizedBox.shrink();
+        }
       },
     );
   }
