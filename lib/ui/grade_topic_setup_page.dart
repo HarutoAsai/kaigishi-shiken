@@ -46,7 +46,15 @@ class _GradeTopicSetupPageState extends State<GradeTopicSetupPage> {
               children: [
                 for (final t in topics)
                   ChoiceChip(
-                    label: Text(t),
+                    label: Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Text(t),
+    SizedBox(height: 2),
+    TopicScoreLabel(topicId: t),
+  ],
+),
                     selected: selectedTopic == t,
                     onSelected: selectedGrade == null ? null : (_) => setState(() => selectedTopic = t),
                   ),
@@ -74,5 +82,6 @@ class _GradeTopicSetupPageState extends State<GradeTopicSetupPage> {
     );
   }
 }
+
 
 

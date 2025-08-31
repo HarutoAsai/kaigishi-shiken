@@ -5,6 +5,7 @@ class TopicScoreLabel extends StatelessWidget {
   final String topicId;
   final TextStyle? style;
   const TopicScoreLabel({super.key, required this.topicId, this.style});
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<dynamic>(
@@ -15,7 +16,10 @@ class TopicScoreLabel extends StatelessWidget {
         final attempted = (s?.attempted ?? 0) as int;
         final correct   = (s?.correct ?? 0) as int;
         final text = attempted == 0 ? '未挑戦' : '$attempted問中 $correct問 正解';
-        return Text(text, style: style ?? const TextStyle(fontWeight: FontWeight.w600));
+        return Text(
+          text,
+          style: style ?? Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+        );
       },
     );
   }
