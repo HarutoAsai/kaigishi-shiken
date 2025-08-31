@@ -1,6 +1,7 @@
 ﻿import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:sealicense_mvp/widgets/topic_summary_banner.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -107,7 +108,7 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const Scaffold(body: SingleChildScrollView(keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag, child: Center(child: CircularProgressIndicator())));
     }
     final q = _qs[_index];
     final total = _qs.length;
@@ -119,6 +120,7 @@ class _QuizPageState extends State<QuizPage> {
       appBar: AppBar(
         title: Text(chosenGrade != null && chosenTopic != null ? '${chosenGrade}級 / $chosenTopic' : 'クイズ'),
         centerTitle: true,
+        bottom: (chosenTopic != null) ? PreferredSize(preferredSize: Size.fromHeight(32), child: TopicSummaryBanner(topicId: chosenTopic!)) : null,
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -153,7 +155,7 @@ class _QuizPageState extends State<QuizPage> {
                         Chip(
                           avatar: const Icon(Icons.insights, size: 18),
                           label: Text(
-                            rate == null ? 'この問題の正答率 ー %（初回）' : 'この問題の正答率 ${ (rate * 100).toStringAsFixed(0) }%',
+                            rate == null ? 'この問題の  ー %（初回）' : 'この問題の  ${ (rate * 100).toStringAsFixed(0) }%',
                           ),
                         ),
                       ],
@@ -299,3 +301,6 @@ class _Stat {
   int correct;
   _Stat(this.attempts, this.correct);
 }
+
+
+
