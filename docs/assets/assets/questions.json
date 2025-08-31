@@ -1,0 +1,10 @@
+﻿[
+  {"id":"navi-001","grade":1,"topic":"航海","question":"地球上の緯度1分はおよそ何海里？","options":["1海里","10海里","60海里","0.1海里"],"answer":0,"explanation":"緯度1分 ≒ 1海里（約1852m）。"},
+  {"id":"navi-002","grade":2,"topic":"航海","question":"国際日付変更線はおよそ経度何度？","options":["90°","120°","180°","0°"],"answer":2,"explanation":"経度180°付近が日付変更線。"},
+  {"id":"law-001","grade":1,"topic":"法規","question":"国際信号旗の“A”は何を意味する？","options":["錨泊中","航行中","潜水作業中・近寄るな","救難通信あり"],"answer":2,"explanation":"A旗は潜水作業中。十分な距離を保つ。"},
+  {"id":"law-002","grade":3,"topic":"法規","question":"「国際海上衝突予防規則」の略称は？","options":["COLREGs","SOLAS","MARPOL","ISM"],"answer":0,"explanation":"国際海上衝突予防規則は COLREGs。"},
+  {"id":"ops-001","grade":2,"topic":"運用","question":"ラダー角が大きいと発生しやすい現象は？","options":["復原性増大","船首引き","船尾揺れ","操舵遅れの減少"],"answer":2,"explanation":"大舵角では船尾が大きく振られる（船尾揺れ）。"},
+  {"id":"ops-002","grade":4,"topic":"運用","question":"荒天時に船首を波に正対させる操船法は？","options":["追い波操船","順航","向かい波操船","横波操船"],"answer":2,"explanation":"荒天時は向かい波操船で安全性を高める。"},
+  {"id":"eng-001","grade":3,"topic":"機関","question":"ディーゼル機関の基本サイクルは？","options":["オットー","ディーゼル","ブレイトン","ランキン"],"answer":1,"explanation":"圧縮着火のディーゼルサイクル。"},
+  {"id":"eng-002","grade":5,"topic":"機関","question":"潤滑油の主な役割に含まれないものは？","options":["摩擦低減","冷却","密封","推進力増大"],"answer":3,"explanation":"推進力増大は潤滑油の役割ではない。"}
+]
