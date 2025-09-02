@@ -1,0 +1,8 @@
+﻿{
+  "labels": {
+    "nav":   { "en": "Navigation", "ja": "航海" },
+    "rules": { "en": "Rules",      "ja": "法規" },
+    "engine":{ "en": "Engine",     "ja": "機関" },
+    "signal":{ "en": "Signals",    "ja": "信号" }
+  }
+}
