@@ -8,4 +8,4 @@ self.addEventListener("activate", e => {
     } catch (err) {}
   })());
 });
-self.addEventListener("fetch", e => {});
+self.addEventListener("fetch", e => {}); // no-op
