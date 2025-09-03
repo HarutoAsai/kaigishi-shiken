@@ -1,4 +1,4 @@
-﻿[
+[
   { "id":"Q-1001", "grade":1, "topic":"Navigation", "body":"Which color is the starboard light?", "choices":["Red","Green","White","Yellow"], "answerIndex":1, "explanation":"Starboard=Green, Port=Red." },
   { "id":"Q-2001", "grade":2, "topic":"Rules",       "body":"In restricted visibility, which signal indicates power-driven vessel making way?", "choices":["One prolonged","Two short","One short","Three short"], "answerIndex":0, "explanation":"One prolonged blast at intervals not more than 2 minutes." },
   { "id":"Q-3001", "grade":3, "topic":"Engine",       "body":"Main purpose of turbocharging?", "choices":["Lower exhaust temp","Increase intake pressure","Raise lube pressure","Reduce friction"], "answerIndex":1, "explanation":"Pressurize intake air to increase output." },

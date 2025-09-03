@@ -18,8 +18,12 @@
     </style>
   </head>
   <body>
-    <script src="flutter_bootstrap.js?v=20250903220803" defer></script>
+    <script src="flutter_bootstrap.js?v=20250903225307" defer></script>
   </body>
 </html>
-
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
+}
+</script>
 
