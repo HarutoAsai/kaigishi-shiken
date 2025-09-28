@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "id": "1_nav_skill_0001",
     "grade": 1,
@@ -6,72 +6,10 @@
     "question": "緯度1分は何海里に相当するか？",
     "choices": ["1海里", "10海里", "60海里", "600海里"],
     "answer_index": 0,
-    "explanation": "緯度1分＝1海里（約1852m）で定義される。",
+    "explanation": "緯度1分＝1海里（約1852m）。",
     "difficulty": "easy",
     "tags": ["基礎", "単位"],
     "source": "教科書A 1章",
-    "year": 0
-  },
-  {
-    "id": "1_nav_instruments_0001",
-    "grade": 1,
-    "topic_id": "nav_instruments",
-    "question": "ジャイロコンパスの主な利点はどれか？",
-    "choices": [
-      "磁気嵐の影響を受けにくい",
-      "電源不要である",
-      "北極域で精度が上がる",
-      "南北半球で180°ずれる"
-    ],
-    "answer_index": 0,
-    "explanation": "ジャイロは地磁気に依存せず真方位を示すため、磁気擾乱の影響を受けにくい。",
-    "difficulty": "normal",
-    "tags": ["真方位", "ジャイロ"],
-    "source": "講義ノート",
-    "year": 0
-  },
-  {
-    "id": "1_law_0001",
-    "grade": 1,
-    "topic_id": "law",
-    "question": "国際信号旗“A”の意味として正しいものはどれか？",
-    "choices": [
-      "危険物を運搬中",
-      "私は潜水夫を下に入れている",
-      "港に入る",
-      "全速後進"
-    ],
-    "answer_index": 1,
-    "explanation": "信号旗“A”は「潜水夫あり」。周囲は低速・十分な距離を保つ。",
-    "difficulty": "easy",
-    "tags": ["国際信号旗"],
-    "source": "国際信号書",
-    "year": 0
-  },
-  {
-    "id": "1_meteo_0001",
-    "grade": 1,
-    "topic_id": "meteo",
-    "question": "等圧線が狭い地域で期待される現象はどれか？",
-    "choices": ["弱風", "無風", "強風", "風向が一定"],
-    "answer_index": 2,
-    "explanation": "気圧傾度が大きい＝地衡風が強くなる。",
-    "difficulty": "normal",
-    "tags": ["天気図"],
-    "source": "気象学入門",
-    "year": 0
-  },
-  {
-    "id": "1_english_0001",
-    "grade": 1,
-    "topic_id": "english",
-    "question": "“Abandon ship” の意味として最も近いものは？",
-    "choices": ["船を捨てよ", "船を停止せよ", "船を見張れ", "船を曳航せよ"],
-    "answer_index": 0,
-    "explanation": "非常時の退船命令。",
-    "difficulty": "easy",
-    "tags": ["IMO英語"],
-    "source": "SMCP",
     "year": 0
   }
 ]
