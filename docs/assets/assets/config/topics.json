@@ -1,9 +1,17 @@
-﻿{
-  "grade_topics": {
-    "1": ["法規", "運用", "機関"],
-    "2": ["法規", "運用", "機関"],
-    "3": ["法規", "運用", "機関"],
-    "4": ["法規", "運用", "機関"],
-    "5": ["法規", "運用", "機関"]
+{
+  "topics": {
+    "nav_skill":    { "ja": "航海術",   "en": "Navigation (Seamanship)" },
+    "nav_instruments": { "ja": "航海計器", "en": "Navigation Instruments" },
+    "law":          { "ja": "法規",     "en": "Maritime Law" },
+    "meteo":        { "ja": "気象・海象", "en": "Meteorology & Oceanography" },
+    "english":      { "ja": "英語",     "en": "English" }
+  },
+  "grades": {
+    "1": ["nav_skill","nav_instruments","law","meteo","english"],
+    "2": ["nav_skill","nav_instruments","law","meteo","english"],
+    "3": ["nav_skill","nav_instruments","law","meteo","english"],
+    "4": ["nav_skill","nav_instruments","law","meteo","english"],
+    "5": ["nav_skill","nav_instruments","law","meteo","english"],
+    "6": ["nav_skill","nav_instruments","law","meteo","english"]
   }
 }
